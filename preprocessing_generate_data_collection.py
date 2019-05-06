@@ -1,6 +1,6 @@
 import os
 from nltk.tokenize import word_tokenize
-
+import pickle
 
 def collect_ids_labels(path_label):
     ids = []
@@ -46,6 +46,11 @@ def tokenize(raw_descriptions, raw_codes):
     return descriptions, codes
 
 
+def save_var(path, var):
+    with open(path, "wb") as file_obj:
+        pickle.dump(var, file_obj)
+
+
 if __name__ == '__main__':
     project = "AspectJ"
     path_data = "./../CollectData/datasets/" + project + "/codes"
@@ -54,6 +59,11 @@ if __name__ == '__main__':
     ids, labels = collect_ids_labels(path_label)
     descriptions, codes = get_raw_data(ids, path_data)
     descriptions, codes = tokenize(descriptions, codes)
+    
+    descriptions_path = "./vars/" + project + "_descriptions.pkl"
+    codes_path = "./vars/" + project + "_codes.pkl"
+    save_var(descriptions_path, descriptions)
+    save_var(codes_path, codes)
 
 #    print(labels)
 #    for i, l in zip(ids, labels):
