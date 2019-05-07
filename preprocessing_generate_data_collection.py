@@ -2,6 +2,7 @@ import os
 from nltk.tokenize import word_tokenize
 import pickle
 
+
 def collect_ids_labels(path_label):
     ids = []
     labels = []
@@ -51,19 +52,35 @@ def save_var(path, var):
         pickle.dump(var, file_obj)
 
 
+def load_var(path):
+    with open(path, "rb") as file_obj:
+        var = pickle.load(file_obj)
+
+    return var
+
+
 if __name__ == '__main__':
     project = "AspectJ"
     path_data = "./../CollectData/datasets/" + project + "/codes"
     path_label = "./../CollectData/datasets/" + project + "/" + project + "_ids_labels.txt"
 
     ids, labels = collect_ids_labels(path_label)
-    descriptions, codes = get_raw_data(ids, path_data)
-    descriptions, codes = tokenize(descriptions, codes)
+#    descriptions, codes = get_raw_data(ids, path_data)
+#    descriptions, codes = tokenize(descriptions, codes)
     
     descriptions_path = "./vars/" + project + "_descriptions.pkl"
     codes_path = "./vars/" + project + "_codes.pkl"
-    save_var(descriptions_path, descriptions)
-    save_var(codes_path, codes)
+    ids_path = "./vars/" + project + "_ids.pkl"
+    labels_path = "./vars/" + project + "_lables.pkl"
+#    save_var(descriptions_path, descriptions)
+#    save_var(codes_path, codes)
+#    save_var(ids_path, ids)
+#    save_var(labels_path, labels)
+
+#    descriptions, codes = load_var(descriptions_path), load_var(codes_path)
+#    print(descriptions[0])
+#    print("\n\n")
+#    print(codes[0])
 
 #    print(labels)
 #    for i, l in zip(ids, labels):
