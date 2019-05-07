@@ -44,10 +44,6 @@ def split_data_with_fold(descriptions, codes, labels, ids, folds_num):
         return train, test
         
 
-        
-
-
-
 if __name__ == '__main__':
     project = "AspectJ"
     path_data = "./../CollectData/datasets/" + project + "/codes"
