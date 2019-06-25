@@ -11,7 +11,7 @@ def convert_label(labels):
         elif l == "True":
             new_labels.append(1)
 
-    return new_labels
+    return np.array(new_labels)
 
 
 def data_info(ids, labels, descriptions, codes):
@@ -33,8 +33,8 @@ def split_data_with_fold(descriptions, codes, labels, ids, folds_num):
         descriptions_test = [descriptions[i] for i in test_index]
         codes_train = [codes[i] for i in train_index]
         codes_test = [codes[i] for i in test_index]
-        labels_train = [labels[i] for i in train_index]
-        labels_test = [labels[i] for i in test_index]
+        labels_train = labels[train_index]
+        labels_test = labels[test_index]
         ids_train = [ids[i] for i in train_index]
         ids_test = [ids[i] for i in test_index]
         
@@ -63,11 +63,12 @@ if __name__ == '__main__':
     train, test = split_data_with_fold(descriptions, codes, labels, ids, 5)
     ids_train, labels_train, msg_train, code_train = train
     ids_test, labels_test, msg_test, code_test = test
+    print(type(labels_train))
 
 #    print(ids_train[0])
 #    print(labels_train[0])
 #    print(msg_train[0])
-#    print(code_train[0])
+    print(code_train[1])
 #    print(ids_test[0])
 #    print(labels_test[0])
 #    print(msg_test[0])
